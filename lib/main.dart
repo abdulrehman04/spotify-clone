@@ -1,11 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:spotify_clone/app/locator.dart';
 import 'package:spotify_clone/app/router.dart';
+import 'package:spotify_clone/firebase_options.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-void main() {
+Future<void> main() async {
   configureDependencies();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 

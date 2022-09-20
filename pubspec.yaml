@@ -37,10 +37,15 @@ dependencies:
   stacked:
   auto_route: ^5.0.1
   stacked_services: ^0.9.5
+  google_sign_in:
   injectable:
   get_it: ^7.2.0
   flutter_screenutil: ^5.5.4
   google_fonts:
+  firebase_core:
+  firebase_auth:
+  cloud_firestore:
+  
 
 dev_dependencies:
   flutter_test:

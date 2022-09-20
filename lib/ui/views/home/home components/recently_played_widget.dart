@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:spotify_clone/app/dummy_data.dart';
+import 'package:spotify_clone/mock%20data/dummy_data.dart';
 import 'package:spotify_clone/ui/widgets/recent_playlists.dart';
 
 recentlyPlayedWidget() {

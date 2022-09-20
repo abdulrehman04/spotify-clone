@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:spotify_clone/globals/heading_1.dart';
+import 'package:spotify_clone/models/playlist_model.dart';
 import 'package:spotify_clone/ui/widgets/playlist_item.dart';
 
-titleAndPlaylist(title, List items) {
+titleAndPlaylist(title, List<PlaylistModel> items) {
   return Column(
     children: [
       Align(
@@ -19,8 +20,8 @@ titleAndPlaylist(title, List items) {
           scrollDirection: Axis.horizontal,
           children: items.map((e) {
             return playlistItem(
-              e['image'],
-              e['title'],
+              e.coverImage,
+              e.name,
             );
           }).toList(),
         ),

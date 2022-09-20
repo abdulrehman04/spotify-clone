@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "588458301601",
+    "project_id": "spotify-clone-dfe02",
+    "storage_bucket": "spotify-clone-dfe02.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588458301601:android:0f7c98e532861246f5f8e0",
+        "android_client_info": {
+          "package_name": "com.karwaan.spotify_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588458301601-356abvdelsdtutr7l30klub8dngsnvn8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQcsGmJfF-E9iYz1V_teVoOeLQTJdVk08"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "588458301601-356abvdelsdtutr7l30klub8dngsnvn8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "588458301601-dr98c0j6dif45pkls6i6okvr4f5vc0hj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.karwaan.spotifyClone"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
