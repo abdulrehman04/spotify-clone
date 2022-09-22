@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:spotify_clone/globals/poppins_text.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-recentPlayList(image, title) {
+Widget recentPlayList(image, title) {
   return Container(
     height: 50.h,
     margin: const EdgeInsets.symmetric(horizontal: 3),

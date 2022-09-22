@@ -1,11 +1,19 @@
 import 'package:injectable/injectable.dart';
+import 'package:spotify_clone/app/locator.dart';
+import 'package:spotify_clone/repository/data_repo.dart';
+import 'package:spotify_clone/services/user_auth_service.dart';
 import 'package:stacked/stacked.dart';
 
 @lazySingleton
 class HomeViewModel extends BaseViewModel {
+  final DataRepo dataRepo = locator<DataRepo>();
+  final UserAuthService auth = locator<UserAuthService>();
+
+  bool _dataFetched = false;
+  get dataFetched => _dataFetched;
+
   getWelcomeMsg() {
     DateTime now = DateTime.now();
-    print(now.hour);
     if (now.hour > 0 && now.hour < 6) {
       return "Night";
     } else if (now.hour > 6 && now.hour < 12) {
@@ -15,5 +23,13 @@ class HomeViewModel extends BaseViewModel {
     } else {
       return "Evening";
     }
+  }
+
+  fetchUserData() async {
+    bool result = await dataRepo.fetchUserData(auth.currentUser.recentlyPlayed);
+    print(result);
+
+    _dataFetched = result;
+    notifyListeners();
   }
 }

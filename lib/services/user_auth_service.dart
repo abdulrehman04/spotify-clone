@@ -16,17 +16,10 @@ class UserAuthService {
   late UserModel currentUser;
   StreamController loggedIn = StreamController.broadcast();
 
-  // UserAuthService() {
-  //   _isUserLoggedIn();
-  // }
-
   isUserLoggedIn() {
     if (auth.currentUser == null) {
-      // print("Ni tha");
       loggedIn.add(LoginStates.notLoggedIn);
-      // print(loggedIn.stream.last.then((value) => print(value)));
     } else {
-      // loggedIn.add(LoginStates.loggedIn);
       _getCurrentUser();
     }
   }
@@ -46,6 +39,7 @@ class UserAuthService {
         firstName: value['name'],
         email: value['email'],
         uid: value.id,
+        recentlyPlayed: value['recentlyPlayed'],
       );
     });
   }
@@ -67,15 +61,15 @@ class UserAuthService {
     loggedIn.add(LoginStates.loggedIn);
   }
 
-  setUserData({
-    required firstName,
-    required email,
-    required uid,
-  }) {
+  setUserData(
+      {required firstName,
+      required email,
+      required uid,
+      required recentlyPlayed}) {
     currentUser = UserModel(
-      firstName: firstName,
-      email: email,
-      uid: uid,
-    );
+        firstName: firstName,
+        email: email,
+        uid: uid,
+        recentlyPlayed: recentlyPlayed);
   }
 }

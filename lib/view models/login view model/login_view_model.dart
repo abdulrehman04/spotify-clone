@@ -33,6 +33,7 @@ class LoginViewModel extends BaseViewModel {
           firstName: value['name'],
           email: value['email'],
           uid: value.id,
+          recentlyPlayed: value['recentlyPlayed'],
         );
         authService.setLogin();
       } else {
@@ -46,6 +47,7 @@ class LoginViewModel extends BaseViewModel {
           firstName: google.displayName,
           email: google.email,
           uid: authUser.user!.uid,
+          recentlyPlayed: value['recentlyPlayed'],
         );
         authService.setLogin();
       }

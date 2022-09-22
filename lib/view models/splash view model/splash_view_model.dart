@@ -12,17 +12,6 @@ class SplashViewModel extends BaseViewModel {
   DataRepo repo = locator<DataRepo>();
   UserAuthService authService = locator<UserAuthService>();
 
-  getState() {
-    print(authService.loggedIn.stream.last.then((value) {
-      print(value);
-    }));
-  }
-
-  Future<bool> fetchData() async {
-    bool result = await repo.fetchData();
-    return result;
-  }
-
   getToHome() {
     nav.replaceWith('/home');
   }
