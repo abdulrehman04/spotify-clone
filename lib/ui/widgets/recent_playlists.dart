@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:spotify_clone/globals/poppins_text.dart';
-import 'package:stacked_services/stacked_services.dart';
+import 'package:spotify_clone/services/custom_navigation_service.dart';
+import '../../app/locator.dart';
 
 Widget recentPlayList(image, title) {
+  CustomNavigationService nav = locator<CustomNavigationService>();
   return Container(
     height: 50.h,
     margin: const EdgeInsets.symmetric(horizontal: 3),
-    width: MediaQuery.of(StackedService.navigatorKey!.currentState!.context)
-                .size
-                .width /
-            2 -
-        21,
+    width: 175.w,
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [

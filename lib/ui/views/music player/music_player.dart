@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:spotify_clone/mock%20data/dummy_data.dart';
 import 'package:spotify_clone/app/locator.dart';
 import 'package:spotify_clone/globals/poppins_text.dart';
+import 'package:spotify_clone/services/custom_navigation_service.dart';
 import 'package:spotify_clone/view%20models/music%20player%20view%20model/music_player_view_model.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -10,7 +11,7 @@ import 'package:stacked_services/stacked_services.dart';
 class MusicPlayer extends StatelessWidget {
   MusicPlayer({Key? key}) : super(key: key);
 
-  final NavigationService nav = locator<NavigationService>();
+  final CustomNavigationService nav = locator<CustomNavigationService>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +32,10 @@ class MusicPlayer extends StatelessWidget {
               ),
               SafeArea(
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 10,
+                  ),
                   child: Column(
                     children: [
                       Row(
@@ -132,19 +135,19 @@ class MusicPlayer extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.favorite_border_outlined,
                               color: Colors.white,
                             ),
-                            Icon(
+                            const Icon(
                               Icons.skip_previous_rounded,
                               color: Colors.white,
                               size: 35,
                             ),
                             Container(
                               // height: 35.h,
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
+                              padding: const EdgeInsets.all(10),
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Colors.white,
                               ),
@@ -160,12 +163,12 @@ class MusicPlayer extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Icon(
+                            const Icon(
                               Icons.skip_next_rounded,
                               color: Colors.white,
                               size: 35,
                             ),
-                            Icon(
+                            const Icon(
                               Icons.remove_circle_outline,
                               color: Colors.white,
                               // size: 30,

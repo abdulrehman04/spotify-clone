@@ -3,14 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:spotify_clone/app/locator.dart';
+import 'package:spotify_clone/services/custom_navigation_service.dart';
 import 'package:spotify_clone/services/user_auth_service.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 
 @lazySingleton
 class LoginViewModel extends BaseViewModel {
   UserAuthService authService = locator<UserAuthService>();
-  NavigationService nav = locator<NavigationService>();
+  CustomNavigationService nav = locator<CustomNavigationService>();
 
   googleLogin() async {
     await GoogleSignIn().signOut();

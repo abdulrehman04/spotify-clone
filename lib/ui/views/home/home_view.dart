@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:spotify_clone/mock%20data/dummy_data.dart';
-import 'package:spotify_clone/app/locator.dart';
 import 'package:spotify_clone/constants.dart';
 import 'package:spotify_clone/globals/poppins_text.dart';
-import 'package:spotify_clone/repository/data_repo.dart';
 import 'package:spotify_clone/ui/views/home/home%20components/recently_played_widget.dart';
 import 'package:spotify_clone/ui/views/home/home%20components/title_and_artists.dart';
 import 'package:spotify_clone/ui/views/home/home%20components/title_and_playlist.dart';
-import 'package:spotify_clone/ui/views/music%20player/bottom_music_player.dart';
+import 'package:spotify_clone/ui/views/music%20player/music_player.dart';
 import 'package:spotify_clone/view%20models/home%20view%20model/home_view_model.dart';
 import 'package:stacked/stacked.dart';
 
 class HomeView extends StatelessWidget {
-  HomeView({Key? key}) : super(key: key);
+  const HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +21,8 @@ class HomeView extends StatelessWidget {
       builder: (context, model, child) {
         return Scaffold(
           backgroundColor: ksecondaryClr,
-          bottomNavigationBar: bottomMusicPlayer(),
           body: SafeArea(
-            child: !model.dataFetched
+            child: !model.dataRepo.dataFetched
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
@@ -59,13 +56,27 @@ class HomeView extends StatelessWidget {
                           SizedBox(
                             height: 20.h,
                           ),
-                          titleAndPlaylist("Recently Played",
-                              model.dataRepo.recentPlaylists),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MusicPlayer()));
+                            },
+                            child: titleAndPlaylist(
+                              "Recently Played",
+                              model.dataRepo.recentPlaylists,
+                              context,
+                            ),
+                          ),
                           SizedBox(
                             height: 20.h,
                           ),
-                          titleAndPlaylist("New Releases",
-                              model.dataRepo.newReleasesPlaylists),
+                          titleAndPlaylist(
+                            "New Releases",
+                            model.dataRepo.newReleasesPlaylists,
+                            context,
+                          ),
                           SizedBox(
                             height: 20.h,
                           ),

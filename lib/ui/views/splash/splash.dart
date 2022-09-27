@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:spotify_clone/constants.dart';
 import 'package:spotify_clone/services/user_auth_service.dart';
 import 'package:spotify_clone/ui/views/auth/login.dart';
+import 'package:spotify_clone/ui/views/bottom_navigation/bottom_navigation.dart';
 import 'package:spotify_clone/ui/views/home/home_view.dart';
 import 'package:spotify_clone/view%20models/splash%20view%20model/splash_view_model.dart';
 import 'package:stacked/stacked.dart';
 
 class Splash extends StatelessWidget {
-  // final SplashViewModel vm = locator<SplashViewModel>();
-
   Splash({Key? key}) : super(key: key) {
     init();
   }
@@ -46,7 +45,7 @@ class Splash extends StatelessWidget {
                 ),
               );
             } else if (snap.data == LoginStates.loggedIn) {
-              return HomeView();
+              return BottomNavigation();
             } else {
               return const Login();
             }

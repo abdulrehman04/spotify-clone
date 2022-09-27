@@ -10,10 +10,10 @@ import 'package:stacked/stacked.dart';
 class DataRepo extends BaseViewModel {
   final List<PlaylistModel> _recentlyPlaylists = [];
   final List<PlaylistModel> _newReleasesPlaylists = [];
-  // bool _dataFetched = false;
+  bool _dataFetched = false;
 
   get recentPlaylists => _recentlyPlaylists;
-  // get dataFetched => _dataFetched;
+  get dataFetched => _dataFetched;
   get newReleasesPlaylists => _newReleasesPlaylists;
 
   Future<bool> _fetchNewReleases() async {
@@ -58,7 +58,8 @@ class DataRepo extends BaseViewModel {
       ),
       _fetchNewReleases(),
     ]);
-    if (result.length > 0) {
+    if (result.isNotEmpty) {
+      _dataFetched = true;
       return true;
     }
     return false;
