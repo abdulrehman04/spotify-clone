@@ -19,21 +19,7 @@ class BottomNavigation extends StatelessWidget {
     }, builder: (context, model, child) {
       return Scaffold(
         backgroundColor: Colors.black,
-        body: IndexedStack(
-          index: model.currentIndex,
-          children: [0, 1, 2].map((e) {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: 'Spotify Clone',
-              home: model.pages[e],
-              navigatorKey: model.navKeys[e],
-              onGenerateRoute: RouteGen.onGenRoute,
-              theme: ThemeData(
-                primarySwatch: Colors.blue,
-              ),
-            );
-          }).toList(),
-        ),
+        body: model.pages[model.currentIndex],
         bottomNavigationBar: BottomNavigationBar(
           selectedLabelStyle: GoogleFonts.poppins(
             color: Colors.white,
