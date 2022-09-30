@@ -20,6 +20,7 @@ class YourLibrary extends StatelessWidget {
       backgroundColor: ksecondaryClr,
       body: ViewModelBuilder<YourLibraryViewModel>.reactive(
         viewModelBuilder: () => locator<YourLibraryViewModel>(),
+        disposeViewModel: false,
         builder: (context, model, child) {
           return SafeArea(
             child: NestedScrollView(
