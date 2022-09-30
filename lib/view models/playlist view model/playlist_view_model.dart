@@ -37,4 +37,9 @@ class PlaylistViewModel extends BaseViewModel {
     _setPlaylist.setPlaylist(playlist);
     notifyListeners();
   }
+
+  setPlaylistAndSongThroughService(PlaylistModel playlist, int song) {
+    _setPlaylist.setPlaylistAndSong(playlist, song);
+    notifyListeners();
+  }
 }

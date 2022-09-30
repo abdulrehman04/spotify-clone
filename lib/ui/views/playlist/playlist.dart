@@ -151,7 +151,8 @@ class _PlaylistState extends State<Playlist> {
                                 InkWell(
                                   onTap: () {
                                     model.setPlaylistThroughService(
-                                        widget.playlist);
+                                      widget.playlist,
+                                    );
                                   },
                                   child: Container(
                                     padding: const EdgeInsets.all(8),
@@ -172,8 +173,15 @@ class _PlaylistState extends State<Playlist> {
                             ),
                             ...model.playlist.fetchedSongs.map((e) {
                               return ListTile(
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 0),
+                                onTap: () {
+                                  model.setPlaylistAndSongThroughService(
+                                    widget.playlist,
+                                    model.playlist.fetchedSongs.indexOf(e),
+                                  );
+                                },
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 0,
+                                ),
                                 leading: Image.network(
                                   e.coverImg,
                                   height: 45,

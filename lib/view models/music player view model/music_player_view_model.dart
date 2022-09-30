@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:spotify_clone/models/playlist_model.dart';
@@ -10,10 +9,8 @@ class MusicPlayerViewModel extends BaseViewModel {
   late SongModel currentSong;
   late PlaylistModel currentPlaylist;
   late Function setStateFunc;
-
-  onSongSet(Function func) {
-    setStateFunc = func;
-  }
+  bool isFullScreen = false;
+  int _currentSongIndex = 0;
 
   bool _songSet = false;
   bool _playlistSet = false;
@@ -28,21 +25,33 @@ class MusicPlayerViewModel extends BaseViewModel {
   bool get playing => _playing;
   bool get initialised => _initialised;
   Duration get position => _position;
+
+  final player1 = AudioPlayer();
+
   MusicPlayerViewModel() {
     init();
   }
 
   init() async {
-    await setUrl();
     player1.positionStream.listen((event) {
       _position = event;
       notifyListeners();
+      checkCompleted(event.inSeconds.toDouble());
     });
-    _initialised = true;
     notifyListeners();
   }
 
-  final player1 = AudioPlayer();
+  updateFullScreen(bool val) {
+    isFullScreen = val;
+    notifyListeners();
+  }
+
+  checkCompleted(position) {
+    if (player1.duration != null &&
+        player1.duration!.inSeconds.toDouble() <= position) {
+      nextSong();
+    }
+  }
 
   setUrl() async {
     await player1.setUrl(
@@ -50,15 +59,22 @@ class MusicPlayerViewModel extends BaseViewModel {
     );
   }
 
-  play() async {
-    if (player1.playing) {
-      await player1.pause();
-      _playing = false;
-    } else {
-      player1.play();
-      _playing = true;
-    }
-    notifyListeners();
+  setPlaylistToPlayer({initIndex = 0}) async {
+    final playlist = ConcatenatingAudioSource(
+      useLazyPreparation: true,
+      shuffleOrder: DefaultShuffleOrder(),
+      children: currentPlaylist.fetchedSongs.map((e) {
+        return AudioSource.uri(Uri.parse(e.url));
+      }).toList(),
+    );
+
+    await player1.setAudioSource(
+      playlist,
+      initialIndex: initIndex,
+      initialPosition: Duration.zero,
+    );
+    _initialised = true;
+    play();
   }
 
   formatTime(Duration duration) {
@@ -74,13 +90,61 @@ class MusicPlayerViewModel extends BaseViewModel {
     currentPlaylist = playlist;
     _playlistSet = true;
     setSong(playlist.fetchedSongs[0]);
+    setPlaylistToPlayer();
+    notifyListeners();
+  }
+
+  setPlaylistAndSong(PlaylistModel playlist, int song) {
+    currentPlaylist = playlist;
+    _playlistSet = true;
+    _currentSongIndex = song;
+    setSong(currentPlaylist.fetchedSongs[song]);
+    setPlaylistToPlayer(initIndex: song);
     notifyListeners();
   }
 
   setSong(SongModel song) {
     currentSong = song;
     _songSet = true;
-    setStateFunc();
     notifyListeners();
+  }
+
+  // Play Functions
+
+  togglePlay() async {
+    if (player1.playing) {
+      await pause();
+    } else {
+      await play();
+    }
+    notifyListeners();
+  }
+
+  pause() async {
+    await player1.pause();
+    _playing = false;
+  }
+
+  play() {
+    player1.play();
+    _playing = true;
+  }
+
+  nextSong() async {
+    _initialised = false;
+    await player1.seekToNext();
+    setSong(
+      currentPlaylist.fetchedSongs[_currentSongIndex = _currentSongIndex + 1],
+    );
+    _initialised = true;
+  }
+
+  prevSong() async {
+    _initialised = false;
+    await player1.seekToPrevious();
+    setSong(
+      currentPlaylist.fetchedSongs[_currentSongIndex = _currentSongIndex - 1],
+    );
+    _initialised = true;
   }
 }

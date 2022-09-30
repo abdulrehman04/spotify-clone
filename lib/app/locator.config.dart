@@ -11,7 +11,7 @@ import 'package:stacked_services/stacked_services.dart' as _i6;
 
 import '../repository/data_repo.dart' as _i5;
 import '../services/custom_navigation_service.dart' as _i4;
-import '../services/third_party_services.dart' as _i13;
+import '../services/third_party_services.dart' as _i14;
 import '../services/user_auth_service.dart' as _i12;
 import '../view%20models/bottom_navigation%20view%20model/bottom_navigation_view_model.dart'
     as _i3;
@@ -21,8 +21,9 @@ import '../view%20models/music%20player%20view%20model/music_player_view_model.d
     as _i9;
 import '../view%20models/playlist%20view%20model/playlist_view_model.dart'
     as _i10;
-import '../view%20models/splash%20view%20model/splash_view_model.dart'
-    as _i11; // ignore_for_file: unnecessary_lambdas
+import '../view%20models/splash%20view%20model/splash_view_model.dart' as _i11;
+import '../view%20models/your_library%20view%20model/your_library_view_model.dart'
+    as _i13; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -42,10 +43,12 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i10.PlaylistViewModel>(() => _i10.PlaylistViewModel());
   gh.lazySingleton<_i11.SplashViewModel>(() => _i11.SplashViewModel());
   gh.lazySingleton<_i12.UserAuthService>(() => _i12.UserAuthService());
+  gh.lazySingleton<_i13.YourLibraryViewModel>(
+      () => _i13.YourLibraryViewModel());
   return get;
 }
 
-class _$ThirdParty extends _i13.ThirdParty {
+class _$ThirdParty extends _i14.ThirdParty {
   @override
   _i6.DialogService get dialogService => _i6.DialogService();
 }

@@ -36,11 +36,13 @@ class UserAuthService {
         .listen((value) {
       loggedIn.add(LoginStates.loggedIn);
       setUserData(
-        firstName: value['name'],
-        email: value['email'],
-        uid: value.id,
-        recentlyPlayed: value['recentlyPlayed'],
-      );
+          firstName: value['name'],
+          email: value['email'],
+          uid: value.id,
+          recentlyPlayed: value['recentlyPlayed'],
+          likedPlaylists: value['likedPlaylists'],
+          likedArtists: value['likedArtists'],
+          likedSongs: value['likedSongs']);
     });
   }
 
@@ -49,7 +51,11 @@ class UserAuthService {
       "name": first,
       'email': email,
       'type': type,
+      'likedPlaylists': [],
+      'likedArtists': [],
+      'likedSongs': [],
     });
+
     return true;
   }
 
@@ -65,11 +71,18 @@ class UserAuthService {
       {required firstName,
       required email,
       required uid,
-      required recentlyPlayed}) {
+      required recentlyPlayed,
+      required likedPlaylists,
+      required likedArtists,
+      required likedSongs}) {
     currentUser = UserModel(
-        firstName: firstName,
-        email: email,
-        uid: uid,
-        recentlyPlayed: recentlyPlayed);
+      firstName: firstName,
+      email: email,
+      uid: uid,
+      recentlyPlayed: recentlyPlayed,
+      likedPlaylists: likedPlaylists,
+      likedArtists: likedArtists,
+      likedSongs: likedSongs,
+    );
   }
 }

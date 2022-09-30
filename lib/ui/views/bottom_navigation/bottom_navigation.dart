@@ -2,23 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:spotify_clone/app/locator.dart';
+import 'package:spotify_clone/app/router.dart';
 import 'package:spotify_clone/constants.dart';
 import 'package:spotify_clone/services/custom_navigation_service.dart';
-import 'package:spotify_clone/ui/views/home/home_view.dart';
-import 'package:spotify_clone/ui/views/search/search.dart';
 import 'package:spotify_clone/view%20models/bottom_navigation%20view%20model/bottom_navigation_view_model.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 
 class BottomNavigation extends StatelessWidget {
   BottomNavigation({Key? key}) : super(key: key);
-
-  final List pages = [HomeView(), Search(), HomeView()];
-  final List navigatorKeys = [
-    GlobalKey<NavigatorState>(),
-    GlobalKey<NavigatorState>(),
-    GlobalKey<NavigatorState>()
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,26 +21,18 @@ class BottomNavigation extends StatelessWidget {
         backgroundColor: Colors.black,
         body: IndexedStack(
           index: model.currentIndex,
-          children: [
-            Navigator(
-              key: navigatorKeys[0],
-              onGenerateRoute: (setting) {
-                return MaterialPageRoute(builder: (context) => HomeView());
-              },
-            ),
-            Navigator(
-              key: navigatorKeys[1],
-              onGenerateRoute: (setting) {
-                return MaterialPageRoute(builder: (context) => Search());
-              },
-            ),
-            Navigator(
-              key: navigatorKeys[2],
-              onGenerateRoute: (setting) {
-                return MaterialPageRoute(builder: (context) => HomeView());
-              },
-            ),
-          ],
+          children: [0, 1, 2].map((e) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Spotify Clone',
+              home: model.pages[e],
+              navigatorKey: model.navKeys[e],
+              onGenerateRoute: RouteGen.onGenRoute,
+              theme: ThemeData(
+                primarySwatch: Colors.blue,
+              ),
+            );
+          }).toList(),
         ),
         bottomNavigationBar: BottomNavigationBar(
           selectedLabelStyle: GoogleFonts.poppins(
@@ -62,8 +45,7 @@ class BottomNavigation extends StatelessWidget {
           unselectedItemColor: Colors.grey[600],
           backgroundColor: ksecondaryClr,
           onTap: (int val) {
-            // locator<CustomNavigationService>().navigationKey =
-            //     navigatorKeys[val];
+            locator<CustomNavigationService>().updateCurrentInUseKey(val);
             model.updateIndex(val);
           },
           items: [

@@ -26,13 +26,14 @@ Widget titleAndPlaylist(title, List<PlaylistModel> items, context) {
           children: items.map((e) {
             return InkWell(
               onTap: () {
+                // print(context.hashCode);
                 // Navigator.push(
                 //   context,
                 //   MaterialPageRoute(
                 //     builder: (context) => Playlist(playlist: e),
                 //   ),
                 // );
-                nav.navigateTo('/playlist-details', arguments: e);
+                nav.navigateToWidget(Playlist(playlist: e));
               },
               child: playlistItem(
                 e.coverImage,

@@ -6,7 +6,6 @@ import 'package:spotify_clone/globals/poppins_text.dart';
 import 'package:spotify_clone/ui/views/home/home%20components/recently_played_widget.dart';
 import 'package:spotify_clone/ui/views/home/home%20components/title_and_artists.dart';
 import 'package:spotify_clone/ui/views/home/home%20components/title_and_playlist.dart';
-import 'package:spotify_clone/ui/views/music%20player/music_player.dart';
 import 'package:spotify_clone/view%20models/home%20view%20model/home_view_model.dart';
 import 'package:stacked/stacked.dart';
 
@@ -56,18 +55,10 @@ class HomeView extends StatelessWidget {
                           SizedBox(
                             height: 20.h,
                           ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => MusicPlayer()));
-                            },
-                            child: titleAndPlaylist(
-                              "Recently Played",
-                              model.dataRepo.recentPlaylists,
-                              context,
-                            ),
+                          titleAndPlaylist(
+                            "Recently Played",
+                            model.dataRepo.recentPlaylists,
+                            context,
                           ),
                           SizedBox(
                             height: 20.h,

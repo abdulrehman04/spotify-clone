@@ -9,9 +9,6 @@ class HomeViewModel extends BaseViewModel {
   final DataRepo dataRepo = locator<DataRepo>();
   final UserAuthService auth = locator<UserAuthService>();
 
-  // bool _dataFetched = false;
-  // get dataFetched => _dataFetched;
-
   getWelcomeMsg() {
     DateTime now = DateTime.now();
     if (now.hour > 0 && now.hour < 6) {
@@ -27,9 +24,7 @@ class HomeViewModel extends BaseViewModel {
 
   fetchUserData() async {
     if (!dataRepo.dataFetched) {
-      bool result =
-          await dataRepo.fetchUserData(auth.currentUser.recentlyPlayed);
-      print(result);
+      await dataRepo.fetchUserData(auth.currentUser.recentlyPlayed);
       notifyListeners();
     }
   }

@@ -13,8 +13,8 @@ recentlyPlayedWidget() {
       runSpacing: 7,
       children: homeViewModel.dataRepo.recentPlaylists.map<Widget>((e) {
         return recentPlayList(
-          images[0],
-          "The way that lovers do",
+          e.coverImage,
+          e.name,
         );
       }).toList(),
     ),

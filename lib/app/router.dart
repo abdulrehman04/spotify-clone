@@ -16,6 +16,7 @@ class RouteGen {
     // if (arg != null) {
     //   args = arg as Map;
     // }
+    print(settings.name);
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(

@@ -34,6 +34,9 @@ class LoginViewModel extends BaseViewModel {
           email: value['email'],
           uid: value.id,
           recentlyPlayed: value['recentlyPlayed'],
+          likedPlaylists: value['likedPlaylists'],
+          likedArtists: value['likedArtists'],
+          likedSongs: value['likedSongs'],
         );
         authService.setLogin();
       } else {
@@ -48,6 +51,9 @@ class LoginViewModel extends BaseViewModel {
           email: google.email,
           uid: authUser.user!.uid,
           recentlyPlayed: value['recentlyPlayed'],
+          likedPlaylists: value['likedPlaylists'],
+          likedArtists: value['likedArtists'],
+          likedSongs: value['likedSongs'],
         );
         authService.setLogin();
       }
